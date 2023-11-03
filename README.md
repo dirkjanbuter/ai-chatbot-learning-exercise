@@ -2,6 +2,8 @@
 
 This is the code that accompanies the meetup event on creating your own chatbot as a learning exercise.
 
+![NLP Screenshot](http://dirkjanbuter.com/media/shared/images/nlp-screenshot.png)
+
 ## Used Dictionaries
 
 * [WordSet](https://github.com/wordset/wordset-dictionary) - Creative Commons Attribution-ShareAlike 4.0 International License
