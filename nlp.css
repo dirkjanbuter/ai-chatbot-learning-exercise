@@ -1,0 +1,179 @@
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url('../fonts/subset-SpaceGrotesk-Light.eot');
+    src: url('../fonts/subset-SpaceGrotesk-Light.eot?#iefix') format('embedded-opentype'),	
+        url('../fonts/subset-SpaceGrotesk-Light.woff2') format('woff2'),
+        url('../fonts/subset-SpaceGrotesk-Light.woff') format('woff'),
+        url('../fonts/subset-SpaceGrotesk-Light.ttf') format('truetype'),
+        url('../fonts/subset-SpaceGrotesk-Light.svg#SpaceGrotesk-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Alegreya Sans SC';
+    src: url('../fonts/AlegreyaSansSC-Medium.woff2') format('woff2'),
+        url('../fonts/AlegreyaSansSC-Medium.woff') format('woff'),
+        url('../fonts/AlegreyaSansSC-Medium.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dyslexie Regular';
+    src: url('../fonts/Dyslexie_Regular_166803.woff') format('woff'),
+        url('../fonts/Dyslexie_Regular_166803.ttf') format('truetype');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'alex_brushregular';
+    src: url('../fonts/alexbrush-regular-webfont.woff2') format('woff2'),
+         url('../fonts/alexbrush-regular-webfont.woff') format('woff'),
+         url('../fonts/alexbrush-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+*
+{
+	font-family: 'Dyslexie Regular';
+	color: #334;
+	background-color: #334;
+	color: #dde;
+}
+body 
+{ 
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, h7, h8, h9
+{
+	font-family: 'Alegreya Sans SC';
+	font-size: 200%;
+}
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, h7 *, h8 *, h9 *
+{
+	font-family: 'Alegreya Sans SC';
+}
+form
+{
+	position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+	padding: 10px;
+	background-color: #dde;
+	color: #334;
+}
+form * 
+{
+	background-color: #dde;
+	color: #334;
+}
+.page 
+{
+	padding: 20px 40px 10px 40px; 
+}
+.links 
+{
+	padding: 10px 40px 70px 40px; 
+}
+.address 
+{
+	width: 50%;
+	border: 1px solid #000;
+}
+a 
+{
+	background-color: #e66;
+	text-decoration: none;
+}
+.sentence
+{
+}
+.word-stopword
+{
+	background-color: #000;
+	color: #666;
+	font-size: 10px;	
+}
+.word-number
+{
+	background-color: #800080;
+}
+.word-logic
+{
+	background-color: #cc0;
+}
+.word-interpunction
+{
+	background-color: #0c0;	
+}
+.word-unknown
+{
+	background-color: #c00;	
+}
+.word-space
+{
+	background-color: #000;	
+	color: #fff;
+}
+.word-verb
+{
+	background-color: #83580b;
+	color: #fff;	
+}
+.word-pronoun
+{
+	background-color: #0cc;	
+}
+.word-day, .word-month
+{
+	background-color: #c0c;	
+}
+.word-noun
+{
+	background-color: #00c;	
+}
+.word-firstname, .word-malename, .word-femalename, .word-unisexname, .word-continent, .word-country, .word-subregion, .word-state, .word-city
+
+
+{
+	background-color: #396;	
+}
+.word-adjective
+{
+	background-color: #ffc;
+	color: #000;	
+}
+.word-article
+{
+	background-color: #f70776;
+	color: #000;
+}
+.word-adverb
+{
+	background-color: #cfc;
+	color: #000;
+}
+.word-irregularverb
+{
+	background-color: #fff;
+	color: #83580b;	
+}
+.word-companyname
+{
+	background-color: #fff;
+	color: #c33;	
+}
+p
+{
+	padding: 5px;
+	margin: 5px;
+	border: 1px dashed #3c3;
+	background-color: #000;	
+}
+h1, h2, h3, h4, h5, h6, h7, h8
+{
+	padding: 5px;
+	margin: 5px;
+	border: 1px dashed #c33;
+	background-color: #000;	
+}
