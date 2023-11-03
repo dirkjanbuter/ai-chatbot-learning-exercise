@@ -2,8 +2,8 @@
 
 • Corpus - Make a spider bot to crawl articles;
 • Corpus - Make a language detector to filter non-English texts;
-• Corpus - Detect the headers and paragraphs (<h1>, <h2>, <h3>, ... <p>) and filter script and style content (<script></script>, <style></style>);
-• Corpus - Get hyperlinks (<a>) and save in a list to crawl later;
+• Corpus - Detect the headers and paragraphs ('h1', 'h2', 'h3', ... 'p' tags) and filter script and style content ('script', 'style' tags);
+• Corpus - Get hyperlinks ('a' tags) and save in a list to crawl later;
 • Tokenization - Break the sentences of the paragraphs into sentence tokens;
 • Tokenization - Break the sentence into word tokens, alpha and special characters separated by spaces and punctuation.
 • Lexicon - Detect punctuation;
