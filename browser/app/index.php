@@ -77,7 +77,7 @@ if(in_array(trim($ip), $blacklist)){
 }
 
 $html = '';
-$id = md5($scheme.'://'.$host.$path).'_'.preg_replace('/[^\da-z]/i', '-', $scheme.'://'.$host.$path);
+$id = md5($scheme.'://'.$host.$path.$query.$fragment).'_'.preg_replace('/[^\da-z]/i', '-', $scheme.'://'.$host.$path.$query.$fragment);
 $file = '../data/cache/'.$id.'.html';
 if(file_exists($file))
 {
