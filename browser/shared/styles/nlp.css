@@ -1,40 +1,6 @@
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('../fonts/subset-SpaceGrotesk-Light.eot');
-    src: url('../fonts/subset-SpaceGrotesk-Light.eot?#iefix') format('embedded-opentype'),	
-        url('../fonts/subset-SpaceGrotesk-Light.woff2') format('woff2'),
-        url('../fonts/subset-SpaceGrotesk-Light.woff') format('woff'),
-        url('../fonts/subset-SpaceGrotesk-Light.ttf') format('truetype'),
-        url('../fonts/subset-SpaceGrotesk-Light.svg#SpaceGrotesk-Light') format('svg');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Alegreya Sans SC';
-    src: url('../fonts/AlegreyaSansSC-Medium.woff2') format('woff2'),
-        url('../fonts/AlegreyaSansSC-Medium.woff') format('woff'),
-        url('../fonts/AlegreyaSansSC-Medium.ttf') format('truetype');
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Dyslexie Regular';
-    src: url('../fonts/Dyslexie_Regular_166803.woff') format('woff'),
-        url('../fonts/Dyslexie_Regular_166803.ttf') format('truetype');
-    font-style: normal;
-}
-@font-face {
-    font-family: 'alex_brushregular';
-    src: url('../fonts/alexbrush-regular-webfont.woff2') format('woff2'),
-         url('../fonts/alexbrush-regular-webfont.woff') format('woff'),
-         url('../fonts/alexbrush-regular-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 *
 {
-	font-family: 'Dyslexie Regular';
+	font-family: Arial, Helvetica, sans-serif;
 	color: #334;
 	background-color: #334;
 	color: #dde;
@@ -45,12 +11,12 @@ body
 }
 h1, h2, h3, h4, h5, h6, h7, h8, h9
 {
-	font-family: 'Alegreya Sans SC';
+	font-family: "Times New Roman", Times, serif;
 	font-size: 200%;
 }
 h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, h7 *, h8 *, h9 *
 {
-	font-family: 'Alegreya Sans SC';
+	font-family: "Times New Roman", Times, serif;
 }
 form
 {
@@ -91,8 +57,7 @@ a
 .word-stopword
 {
 	background-color: #000;
-	color: #666;
-	font-size: 10px;	
+	color: #666;	
 }
 .word-number
 {
@@ -177,3 +142,4 @@ h1, h2, h3, h4, h5, h6, h7, h8
 	border: 1px dashed #c33;
 	background-color: #000;	
 }
+

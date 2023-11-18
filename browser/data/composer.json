@@ -1,0 +1,6 @@
+{
+    "require": {
+        "league/html-to-markdown": "^5.1",
+        "cebe/markdown": "^1.2"
+    }
+}

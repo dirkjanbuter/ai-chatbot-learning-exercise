@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ini_set('max_execution_time', '1000');
 ini_set('default_charset', 'UTF-8');
-ini_set('memory_limit', '10G');
+ini_set('memory_limit', '256G');
 
 $data = [
 'stopword' => ['stopwords.dat', [], 1],
@@ -32,7 +32,7 @@ $data = [
 
 foreach($data as $type => $val)
 {
-	if (!($fp = fopen($val[0], 'r')))
+	if (!($fp = fopen('../data/datfiles/'.$val[0], 'r')))
 	{
 		echo 'Error: Opening data file \''.$val[0].'\' feiled!';
 	}
@@ -51,12 +51,14 @@ foreach($data as $type => $val)
 	}
 }
 
-$url = isset($_GET['url'])?$_GET['url']:'http://dirkjanbuter.com/magazine/en/david-ishees-incredible-journey-from-mississippi-to-the-world.html';
+$url = isset($_GET['url'])?$_GET['url']:'https://dirkjanbuter.github.io/magazine/en/welcome-and-open-a-new-world-and-discover-its-secrets.html';
 
 $parts = parse_url($url);
 $scheme = $parts['scheme'] ?? 'https';
 $host = $parts['host'] ?? 'localhost';
 $path = $parts['path'] ?? '/';
+$query = isset($parts['query'])?('?'.$parts['query']):'';
+$fragment = isset($parts['fragment'])?('#'.$parts['fragment']):'';
 $root = mb_substr($path, 0, strrpos($path, '/') + 1);
 $ip = gethostbyname($host);
 
@@ -76,14 +78,14 @@ if(in_array(trim($ip), $blacklist)){
 
 $html = '';
 $id = md5($scheme.'://'.$host.$path).'_'.preg_replace('/[^\da-z]/i', '-', $scheme.'://'.$host.$path);
-$file = 'cache/'.$id.'.html';
+$file = '../data/cache/'.$id.'.html';
 if(file_exists($file))
 {
 	$html = file_get_contents($file);
 }
 else
 {
-	$html = file_get_contents($scheme.'://'.$host.$path);
+	$html = file_get_contents($scheme.'://'.$host.$path.$query.$fragment);
 	file_put_contents($file, $html);
 }
 $html = mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8");
@@ -237,6 +239,176 @@ function sentence($text)
 
 
 
+$html = '';
+$id = md5($scheme.'://'.$host.$path).'_'.preg_replace('/[^\da-z]/i', '-', $scheme.'://'.$host.$path);
+$file = '../data/cache/'.$id.'.cch';
+
+
+$exists = false;
+if(file_exists($file))
+{
+	if(isset($_GET['img']))
+	{  
+		header('Content-Type: image/png');
+		readfile('../shared/images/exists.png');
+		exit;
+	}
+	$exists = true;
+}
+
+
+
+$links = [];
+
+function setLinkUrl($source, $title)
+{
+	global $links, $parts;
+	
+	$linkParts = parse_url($source);
+	$scheme = $linkParts['scheme'] ?? $parts['scheme'] ?? 'https';
+	$host = $linkParts['host'] ?? $parts['host'] ?? 'localhost';
+	if(!isset($linkParts['path']) || empty($linkParts['path']))
+	{
+		$path = '/';	
+	}	
+	elseif(substr($linkParts['path'], 0, 1) != '/')
+	{
+		$path = substr($parts['path'], 0, strrpos($parts['path'], '/')+1).$linkParts['path'];
+	}
+	else
+	{
+		$path = $linkParts['path'] ?? $parts['path'] ?? '/';
+	}
+	$query = isset($linkParts['query'])?('?'.$linkParts['query']):'';
+	$fragment = isset($linkParts['fragment'])?('#'.$linkParts['fragment']):'';
+	$root = mb_substr($path, 0, strrpos($path, '/') + 1);
+	$ip = gethostbyname($host);
+
+
+	if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))
+	{
+	    return;
+	}
+	$blacklist = array(
+	    '127.0.0.1',
+	    '::1'
+	);	
+	if(in_array(trim($ip), $blacklist)){
+	    return;
+	}
+	if($scheme !== 'http' && $scheme !== 'https')
+	{
+		return;
+	}
+	$linkUrl = $scheme.'://'.$host.$path.$query.$fragment;
+	$link['source'] = $linkUrl;
+	$link['id'] = md5($linkUrl .':' . 'magic');
+	$link['title'] = $title;
+	$links[] = $link;
+}
+
+/*
+function setLinkUrl($source, $title)
+{
+	global $links, $parts;
+	
+	$linkParts = parse_url($source);
+	$scheme = $linkParts['scheme'] ?? $parts['scheme'] ?? 'https';
+	$host = $linkParts['host'] ?? $parts['host'] ?? 'localhost';
+	$path = $linkParts['path'] ?? $parts['path'] ?? '/';
+	$root = mb_substr($path, 0, strrpos($path, '/') + 1);
+	$ip = gethostbyname($host);
+
+
+	if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))
+	{
+	    return;
+	}
+	$blacklist = array(
+	    '127.0.0.1',
+	    '::1'
+	);	
+	if(in_array(trim($ip), $blacklist)){
+	    return;
+	}
+	if($scheme !== 'http' && $scheme !== 'https')
+	{
+		return;
+	}
+	$linkUrl = $scheme.'://'.$host.$path;
+	
+	$link['source'] = $linkUrl;
+	$link['id'] = md5($linkUrl .':' . 'magic');
+	$link['title'] = $title;
+	$links[] = $link;
+}*/
+
+function showDOMNode(DOMNode $domNode, $html) 
+{
+
+    foreach ($domNode->childNodes as $node)
+    {
+	switch($node->nodeName)
+	{
+		case 'h1': 
+		case 'h2': 
+		case 'h3': 
+		case 'h4':
+		case 'h5':
+		case 'h6':
+		case 'h7':
+		case 'h8': 
+		{
+			$html .= '<'.$node->nodeName.'>'.tokenize($node->textContent).'</'.$node->nodeName.'>'; 
+			foreach ($node->childNodes as $subnode)
+    			{
+   				if($subnode->nodeName !== 'a')
+    					continue;
+				setLinkUrl($subnode->getAttribute('href'), $subnode->textContent);
+			}	
+		} break;
+		case 'p': 
+		{
+			if(trim($node->nodeValue) !== '')
+			{
+				$text = $node->ownerDocument->saveHTML($node);
+				$text = preg_replace('/<\s*(style|script).+?<\s*\/\s*(style|script).*?>|\[[0-9^\]]+\]|\[[a-zA-Z^\]]\]/iu', '', $text);
+				$text = strip_tags($text, '<br>');
+				$paragraph = sentence($text);
+				if(trim($paragraph) !== '')
+				{
+					$html .= '<p>';
+					$html .= $paragraph;
+					$html .= '</p>'; 
+				}
+			}
+			
+			foreach ($node->childNodes as $subnode)
+    			{
+    			
+    			    	if($subnode->nodeName !== 'a')
+    					continue;
+				setLinkUrl($subnode->getAttribute('href'), $subnode->textContent);
+			}			
+		} break;
+		case 'a': 
+		{
+			setLinkUrl($node->getAttribute('href'), $node->textContent);
+		} break;
+		default:
+		{
+		        if($node->hasChildNodes()) 
+		        {
+		            $html = showDOMNode($node, $html);
+		        }
+		}
+
+	}
+    }
+    return $html;    
+}
+
+/*
 function showDOMNode(DOMNode $domNode, $html) 
 {
     foreach ($domNode->childNodes as $node)
@@ -250,7 +422,8 @@ function showDOMNode(DOMNode $domNode, $html)
 		case 'h5':
 		case 'h6':
 		case 'h7':
-		case 'h8': $html .= '<'.$node->nodeName.'>'.tokenize($node->textContent).'</'.$node->nodeName.'>'; break;
+		case 'h8': 
+		$html .= '<'.$node->nodeName.'>'.tokenize($node->textContent).'</'.$node->nodeName.'>'; break;
 		case 'p': {
 			if(trim($node->nodeValue) !== '')
 			{
@@ -278,29 +451,115 @@ function showDOMNode(DOMNode $domNode, $html)
 	}
     }
     return $html;    
+}*/
+//$html = showDOMNode($doc, '');
+
+
+
+
+if(!$exists)
+{
+	$html = file_get_contents($scheme.'://'.$host.$path);
+
+	$html = mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8");
+
+	$doc = new DOMDocument();
+	$doc->loadHTML($html, LIBXML_NOWARNING | LIBXML_NOERROR);
+
+	$html = showDOMNode($doc, '');
+	
+	file_put_contents('../data/cache/'.$id.'.cch', $url."\r\n".$html);
+
+	// Create links file
+	$i = 0;
+	if (!$fp = fopen('../data/cache/'.$id.'.lns', 'w')) 
+	{
+		echo "Cannot open file ($filename)";
+		return false;
+	}
+		
+
+	foreach($links as $link)
+	{
+		$binarydata = pack('Pa2083a256', $i+1, $link['source'], $link['title']);
+		fwrite($fp, $binarydata);
+		$i++;
+	}
+
+	fclose($fp);
 }
-$html = showDOMNode($doc, '');
+else
+{
+	$html = file_get_contents($file);
+	$html = substr($html, strpos($html, "\n")+1);
 
 
-echo '<!DOCTYPE html>';
-echo '<html>';
-echo '<head>';
-echo '<meta charset="UTF-8">';
-echo '<meta name="robots" content="noindex, nofollow">';
-echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-echo '<title>NLP Browser</title>';
-echo '<link rel="stylesheet" href="nlp.css">';
-echo '</head>';
-echo '<body>';
 
-echo '<form method="get" action="nlp.php">';
-echo '<input class="address" type="text" name="url" value="'.htmlspecialchars($scheme.'://'.$host.$path).'"/>';
-echo '<input type="submit" value="GO!">';
-echo '</form>';
+	if (!$fp = fopen('../data/cache/'.$id.'.lns', 'r')) 
+	{
+		echo "Cannot open file ($filename)";
+		return false;
+	}
+		
 
-echo '<div class="page">';
-echo $html;
-echo '</div>';
+	do
+	{
+		$binarydata = fread($fp, 2347);
+		if($binarydata) {
+			$link = [];
+			$key = unpack('P', $binarydata, 0)[1];
+			$link['source'] = trim(unpack('a2083', $binarydata, 8)[1]);
+			$link['title'] = trim(unpack('a256', $binarydata, 2081)[1]);
+			$links[$key] = $link;
+		}
+	} while(!feof($fp));
 
-echo '</body>';
-echo '</html>';
+	fclose($fp);
+
+}
+
+
+
+
+if(isset($_GET['img']))
+{  
+	header('Content-Type: image/png');
+	readfile('../shared/images/succeeded.png');
+	exit;
+}
+else
+{
+	echo '<!DOCTYPE html>';
+	echo '<html>';
+	echo '<head>';
+	echo '<meta charset="UTF-8">';
+	echo '<meta name="robots" content="noindex, nofollow">';
+	echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+	echo '<title>NLP Browser</title>';
+	echo '<link rel="stylesheet" href="../shared/styles/nlp.css">';
+	echo '</head>';
+	echo '<body>';
+
+	echo '<form method="get" action="index.php">';
+	echo '<input class="address" type="text" name="url" value="'.htmlspecialchars($scheme.'://'.$host.$path).'"/>';
+	echo '<input type="submit" value="GO!">';
+	echo '</form>';
+
+	echo '<div class="page">';
+	echo $html;
+	echo '</div>';
+
+	echo '<div class="links">';
+			foreach($links as $link)
+			{
+			 	echo '<img src="?img=1&url='.urlencode($link['source']).'" width="12" height="12"> ' . htmlspecialchars($link['title']).' (<a href="?url='.urlencode($link['source']).'">'.htmlspecialchars($link['source']).'</a>)<br>';
+			}
+	echo '</div>';
+
+	echo '</body>';
+
+	echo '</html>';
+}
+
+
+

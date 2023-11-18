@@ -1,0 +1,133 @@
+*
+{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #334;
+	background-color: #334;
+	color: #dde;
+}
+body 
+{ 
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, h7, h8, h9
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 200%;
+}
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, h7 *, h8 *, h9 *
+{
+	font-family: "Times New Roman", Times, serif;
+}
+form
+{
+	position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+	padding: 10px;
+	background-color: #dde;
+	color: #334;
+}
+form * 
+{
+	background-color: #dde;
+	color: #334;
+}
+.page 
+{
+	padding: 20px 40px 10px 40px; 
+}
+.links 
+{
+	padding: 10px 40px 70px 40px; 
+}
+.address 
+{
+	width: 50%;
+	border: 1px solid #000;
+}
+a 
+{
+	color: #e66;
+	text-decoration: none;
+}
+.sentence
+{
+	display: inline-block;
+	border: 2px solid #ccc;
+	padding: 3px;
+	margin: 3px;
+}
+.word-stopword
+{
+	background-color: #000;
+	color: #666;
+	font-size: 10px;	
+}
+.word-number
+{
+	background-color: #800080;
+}
+.word-logic
+{
+	background-color: #cc0;
+}
+.word-interpunction
+{
+	background-color: #0c0;	
+}
+.word-unknown
+{
+	background-color: #c00;	
+}
+.word-space
+{
+	background-color: #000;	
+	color: #fff;
+}
+.word-verb
+{
+	background-color: #83580b;	
+}
+.word-pronoun
+{
+	background-color: #0cc;	
+}
+.word-day, .word-month
+{
+	background-color: #c0c;	
+}
+.word-noun
+{
+	background-color: #00c;	
+}
+.word-firstname, .word-countries
+{
+	background-color: #396;	
+}
+.word-adjective
+{
+	background-color: #ffc;
+	color: #000;	
+}
+.word-article
+{
+	background-color: #f70776;
+	color: #000;
+}
+.word-adverb
+{
+	background-color: #cfc;
+	color: #000;
+}
+p
+{
+	padding: 5px;
+	margin: 5px;
+}
+h1, h2, h3, h4, h5, h6, h7, h8
+{
+	padding: 5px;
+	margin: 5px;
+}
+
