@@ -307,41 +307,6 @@ function setLinkUrl($source, $title)
 	$links[] = $link;
 }
 
-/*
-function setLinkUrl($source, $title)
-{
-	global $links, $parts;
-	
-	$linkParts = parse_url($source);
-	$scheme = $linkParts['scheme'] ?? $parts['scheme'] ?? 'https';
-	$host = $linkParts['host'] ?? $parts['host'] ?? 'localhost';
-	$path = $linkParts['path'] ?? $parts['path'] ?? '/';
-	$root = mb_substr($path, 0, strrpos($path, '/') + 1);
-	$ip = gethostbyname($host);
-
-
-	if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))
-	{
-	    return;
-	}
-	$blacklist = array(
-	    '127.0.0.1',
-	    '::1'
-	);	
-	if(in_array(trim($ip), $blacklist)){
-	    return;
-	}
-	if($scheme !== 'http' && $scheme !== 'https')
-	{
-		return;
-	}
-	$linkUrl = $scheme.'://'.$host.$path;
-	
-	$link['source'] = $linkUrl;
-	$link['id'] = md5($linkUrl .':' . 'magic');
-	$link['title'] = $title;
-	$links[] = $link;
-}*/
 
 function showDOMNode(DOMNode $domNode, $html) 
 {
@@ -407,55 +372,6 @@ function showDOMNode(DOMNode $domNode, $html)
     }
     return $html;    
 }
-
-/*
-function showDOMNode(DOMNode $domNode, $html) 
-{
-    foreach ($domNode->childNodes as $node)
-    {
-	switch($node->nodeName)
-	{
-		case 'h1': 
-		case 'h2': 
-		case 'h3': 
-		case 'h4':
-		case 'h5':
-		case 'h6':
-		case 'h7':
-		case 'h8': 
-		$html .= '<'.$node->nodeName.'>'.tokenize($node->textContent).'</'.$node->nodeName.'>'; break;
-		case 'p': {
-			if(trim($node->nodeValue) !== '')
-			{
-				$text = $node->ownerDocument->saveHTML($node);
-				$text = preg_replace('/<\s*(style|script).+?<\s*\/\s*(style|script).*?>|\[[0-9^\]]+\]|\[[a-zA-Z^\]]\]/iu', '', $text);
-				$text = strip_tags($text, '<br>');
-				$paragraph = sentence($text);
-				if(trim($paragraph) !== '')
-				{
-					$html .= '<p>';
-					$html .= $paragraph;
-					$html .= '</p>'; 
-				}
-			}
-		} break;
-		//case 'a': echo $node->textContent.' '; break;
-		default:
-		{
-		        if($node->hasChildNodes()) 
-		        {
-		            $html = showDOMNode($node, $html);
-		        }
-		}
-
-	}
-    }
-    return $html;    
-}*/
-//$html = showDOMNode($doc, '');
-
-
-
 
 if(!$exists)
 {
